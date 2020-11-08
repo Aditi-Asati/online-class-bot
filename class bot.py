@@ -1,16 +1,18 @@
-import datetime, pyautogui as p, webbrowser, time, win10toast
-
+import pyautogui as p, webbrowser
+from win10toast import ToastNotifier
+from datetime import datetime
+from time import sleep
 
 def zoom_meeting(subject_id:str, password:str):
     """func which takes subject id and password as an argument and, basically zoom automation"""
-    time.sleep(10)
+    sleep(10)
     p.click(530, 281)
-    time.sleep(2)
+    sleep(2)
     p.click(651, 323)
-    time.sleep(1)
+    sleep(1)
     p.typewrite(subject_id)
     p.press('enter')
-    time.sleep(5)
+    sleep(5)
     p.typewrite(password)
     p.press('enter')
 
@@ -25,14 +27,14 @@ def alert(lecture:str):
     """
     Alerts the user on the event of a class.
     """
-    toaster = win10toast.ToastNotifier()
+    toaster = ToastNotifier()
     toaster.show_toast("Class Notification", f"{lecture} lecture right now. Joining the meeting now...")
 
 if __name__ == "__main__":
 
     while 1:
-        day = datetime.datetime.now().strftime("%A")
-        hour = datetime.datetime.now().strftime("%H:%M")
+        day = datetime.now().strftime("%A")
+        hour = datetime.now().strftime("%H:%M")
 
         # monday schedule
         if day == "Monday":
@@ -58,7 +60,7 @@ if __name__ == "__main__":
 
             else:
                 print("NO class right now!")
-                time.sleep(60)
+                sleep(60)
 
 
         # tuesday schedule
@@ -80,7 +82,7 @@ if __name__ == "__main__":
 
             else:
                 print("NO class right now!")
-                time.sleep(60)
+                sleep(60)
 
 
         # wednesday schedule
@@ -97,7 +99,7 @@ if __name__ == "__main__":
 
             else:
                 print("NO class right now!")
-                time.sleep(60)
+                sleep(60)
 
 
         # thursday schedule
@@ -119,7 +121,7 @@ if __name__ == "__main__":
 
             else:
                 print("NO class right now!")
-                time.sleep(60)
+                sleep(60)
 
 
         # friday schedule
@@ -141,7 +143,7 @@ if __name__ == "__main__":
 
             else:
                 print("NO class right now!")
-                time.sleep(60)
+                sleep(60)
 
 
         else:
