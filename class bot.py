@@ -2,9 +2,11 @@ import pyautogui as p, webbrowser
 from win10toast import ToastNotifier
 from datetime import datetime
 from time import sleep
+from os import startfile
 
 def zoom_meeting(subject_id:str, password:str):
     """func which takes subject id and password as an argument and, basically zoom automation"""
+    startfile(r"C:\Users\Lenovo\AppData\Roaming\Zoom\bin\Zoom.exe")
     sleep(10)
     p.click(530, 281)
     sleep(2)
