@@ -40,7 +40,7 @@ if __name__ == "__main__":
 
         # monday schedule
         if day == "Monday":
-            if hour == "9:00" or hour == "9:01" or hour == "9:02" or hour == "9:03" or hour == "9:04" or hour == "9:05":
+            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
                 # PHY211
                 alert("PHY211")
                 zoom_meeting("PHY211", "PHY211")
@@ -55,7 +55,7 @@ if __name__ == "__main__":
                 alert("BIO211")
                 zoom_meeting("BIO211", "BIO211")
 
-            elif hour == "3:40" or hour == "3:41" or hour == "3:42" or hour == "3:43" or hour == "3:44" or hour == "3:45":
+            elif hour == "15:40" or hour == "15:41" or hour == "15:42" or hour == "15:43" or hour == "15:44" or hour == "15:45":
                 # CHM211
                 alert("CMH211")
                 zoom_meeting("CHM211", "CHM211")
@@ -77,7 +77,7 @@ if __name__ == "__main__":
                 alert("CHM211")
                 zoom_meeting("CHM211", "CHM211")
 
-            elif hour == "3:40" or hour == "3:41" or hour == "3:42" or hour == "3:43" or hour == "3:44" or hour == "3:45":
+            elif hour == "15:40" or hour == "15:41" or hour == "15:42" or hour == "15:43" or hour == "15:44" or hour == "15:45":
                 # PHY211
                 alert("PHY211")
                 zoom_meeting("PHY211", "PHY211")
@@ -89,12 +89,12 @@ if __name__ == "__main__":
 
         # wednesday schedule
         elif day == "Wednesday":
-            if hour == "9:00" or hour == "9:01" or hour == "9:02" or hour == "9:03" or hour == "9:04" or hour == "9:05":
+            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
                 # CHM211
                 alert("CHM211")
                 google_meet("CHM211")
 
-            elif hour == "2:30" or hour == "2:31" or hour == "2:32" or hour == "2:33" or hour == "2:34" or hour == "2:35":
+            elif hour == "14:30" or hour == "14:31" or hour == "14:32" or hour == "14:33" or hour == "14:34" or hour == "14:35":
                 # BIO213
                 alert("BIO213")
                 google_meet("BIO213")
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
         # thursday schedule
         elif day == "Thursday":
-            if hour == "9:00" or hour == "9:01" or hour == "9:02" or hour == "9:03" or hour == "9:04" or hour == "9:05":
+            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
                 # PHY211
                 alert("PHY211")
                 google_meet("PHY211")   
@@ -116,7 +116,7 @@ if __name__ == "__main__":
                 alert("MTH211")
                 zoom_meeting("MTH211", "MTH211")
 
-            elif hour == "2:30" or hour == "2:31" or hour == "2:32" or hour == "2:33" or hour == "2:34" or hour == "2:35":
+            elif hour == "14:30" or hour == "14:31" or hour == "14:32" or hour == "14:33" or hour == "14:34" or hour == "14:35":
                 # BIO213
                 alert("BIO213")
                 zoom_meeting("BIO213", "BIO213")
@@ -128,7 +128,7 @@ if __name__ == "__main__":
 
         # friday schedule
         elif day == "Friday":
-            if hour == "9:00" or hour == "9:01" or hour == "9:02" or hour == "9:03" or hour == "9:04" or hour == "9:05":
+            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
                 # BIO213
                 alert("BIO213")
                 zoom_meeting("BIO213", "BIO213")
@@ -138,7 +138,7 @@ if __name__ == "__main__":
                 alert("BIO211")
                 zoom_meeting("BIO211", "BIO211")
 
-            elif hour == "2:30" or hour == "2:31" or hour == "2:32" or hour == "2:33" or hour == "2:34" or hour == "2:35":
+            elif hour == "14:30" or hour == "14:31" or hour == "14:32" or hour == "14:33" or hour == "14:34" or hour == "14:35":
                 # MTH211
                 alert("MTH211")
                 zoom_meeting("MTH211", "MTH211")
