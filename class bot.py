@@ -39,7 +39,7 @@ def join_class(day:str):
     """
     Checks if there is any class on a particular date by extracting data from timetable.xlsx.
     """
-    timetable = pandas.read_excel(r"C:\Users\Lenovo\Documents\MS Office\Excel files\timetable.xlsx", sheet_name=day)
+    timetable = pandas.read_excel("timetable.xlsx", sheet_name=day)
     current_time = datetime.now().strftime("%H:%M")
     current_hour = int(datetime.now().strftime("%H"))
     current_minute = int(datetime.now().strftime("%M"))
