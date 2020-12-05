@@ -59,12 +59,12 @@ def join_class(day:str):
                 meeting_id = item["Meeting ID/Link"]
                 meeting_password = item["Meeting Password"]
                 alert(class_name)
-                zoom_meeting(meeting_id, meeting_password)
+                zoom_meeting(str(meeting_id), str(meeting_password))
 
             elif joining_mode == "Meet":
                 meeting_link = item["Meeting ID/Link"]
                 alert(class_name)
-                google_meet(meeting_link)
+                google_meet(str(meeting_link))
 
     else:
         print(f"No class right now at {current_time}.")
