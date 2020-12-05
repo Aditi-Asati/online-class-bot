@@ -2,152 +2,77 @@ import pyautogui as p, webbrowser
 from win10toast import ToastNotifier
 from datetime import datetime
 from time import sleep
-from os import startfile
+from os import startfile, getlogin
+import pandas
 
-def zoom_meeting(subject_id:str, password:str):
-    """func which takes subject id and password as an argument and, basically zoom automation"""
-    startfile(r"C:\Users\Lenovo\AppData\Roaming\Zoom\bin\Zoom.exe")
+def zoom_meeting(meeting_id:str, password:str):
+    """Joins zoom meeting with provided meeting_id and password."""
+    startfile(f"C:\\Users\\{getlogin()}\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe")
     sleep(10)
     p.click(530, 281)
     sleep(2)
     p.click(651, 323)
     sleep(1)
-    p.typewrite(subject_id)
+    p.typewrite(meeting_id)
     p.press('enter')
     sleep(5)
     p.typewrite(password)
     p.press('enter')
+    exit()
 
-def google_meet(classlink:str):
+def google_meet(meeting_link:str):
     """
-    Google meet automation.
+    Joins meetings held in google_meet.
     """
     wb = webbrowser.Chrome(r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe")
-    wb.open_new(classlink)
+    wb.open_new_tab(meeting_link)
+    quit()
 
 def alert(lecture:str):
     """
     Alerts the user on the event of a class.
     """
     toaster = ToastNotifier()
-    toaster.show_toast("Class Notification", f"{lecture} lecture right now. Joining the meeting now...")
+    toaster.show_toast("Class Notification", f"{lecture} class right now. Joining the meeting...")
+
+def join_class(day:str):
+    """
+    Checks if there is any class on a particular date by extracting data from timetable.xlsx.
+    """
+    timetable = pandas.read_excel(r"C:\Users\Lenovo\Documents\MS Office\Excel files\timetable.xlsx", sheet_name=day)
+    current_time = datetime.now().strftime("%H:%M")
+    current_hour = int(datetime.now().strftime("%H"))
+    current_minute = int(datetime.now().strftime("%M"))
+
+    for _, item in timetable.iterrows():
+        class_hour = int(item["Class Time"].split(":")[0])
+        class_minute = int(item["Class Time"].split(":")[-1])
+
+        if class_hour == current_hour and current_minute in range(class_minute, class_minute + 10):
+            class_name = item["Class Name"]
+            joining_mode = item["Mode"].capitalize()
+
+            if joining_mode not in ["Zoom", "Meet"]:
+                raise Exception("Improper data filled in timetable.xlsx! Mode can either be 'Zoom' or 'Meet'.")
+
+            if joining_mode == "Zoom":
+                meeting_id = item["Meeting ID/Link"]
+                meeting_password = item["Meeting Password"]
+                alert(class_name)
+                zoom_meeting(str(meeting_id), str(meeting_password))
+
+            elif joining_mode == "Meet":
+                meeting_link = item["Meeting ID/Link"]
+                alert(class_name)
+                google_meet(str(meeting_link))
+
+    else:
+        print(f"No class right now at {current_time}.")
 
 if __name__ == "__main__":
 
     while 1:
         day = datetime.now().strftime("%A")
-        hour = datetime.now().strftime("%H:%M")
 
-        # monday schedule
-        if day == "Monday":
-            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
-                # PHY211
-                alert("PHY211")
-                zoom_meeting("PHY211", "PHY211")
-
-            elif hour == "11:20" or hour == "11:21" or hour == "11:22" or hour == "11:23" or hour == "11:24" or hour == "11:25":
-                # MTH211
-                alert("MTH211")
-                google_meet("MTH211")
-
-            elif hour == "12:30" or hour == "12:31" or hour == "12:32" or hour == "12:33" or hour == "12:34" or hour == "12:35":
-                # BIO211
-                alert("BIO211")
-                zoom_meeting("BIO211", "BIO211")
-
-            elif hour == "15:40" or hour == "15:41" or hour == "15:42" or hour == "15:43" or hour == "15:44" or hour == "15:45":
-                # CHM211
-                alert("CMH211")
-                zoom_meeting("CHM211", "CHM211")
-
-            else:
-                print("NO class right now!")
-                sleep(60)
-
-
-        # tuesday schedule
-        elif day == "Tuesday":
-            if hour == "10:10" or hour == "10:11" or hour == "10:12" or hour == "10:13" or hour == "10:14" or hour == "10:15":
-                # BIO211
-                alert("BIO211")
-                google_meet("BIO211")
-
-            elif hour == "12:30" or hour == "12:31" or hour == "12:32" or hour == "12:33" or hour == "12:34" or hour == "12:35":
-                # CHM211
-                alert("CHM211")
-                zoom_meeting("CHM211", "CHM211")
-
-            elif hour == "15:40" or hour == "15:41" or hour == "15:42" or hour == "15:43" or hour == "15:44" or hour == "15:45":
-                # PHY211
-                alert("PHY211")
-                zoom_meeting("PHY211", "PHY211")
-
-            else:
-                print("NO class right now!")
-                sleep(60)
-
-
-        # wednesday schedule
-        elif day == "Wednesday":
-            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
-                # CHM211
-                alert("CHM211")
-                google_meet("CHM211")
-
-            elif hour == "14:30" or hour == "14:31" or hour == "14:32" or hour == "14:33" or hour == "14:34" or hour == "14:35":
-                # BIO213
-                alert("BIO213")
-                google_meet("BIO213")
-
-            else:
-                print("NO class right now!")
-                sleep(60)
-
-
-        # thursday schedule
-        elif day == "Thursday":
-            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
-                # PHY211
-                alert("PHY211")
-                google_meet("PHY211")   
-
-            elif hour == "11:20" or hour == "11:21" or hour == "11:22" or hour == "11:23" or hour == "11:24" or hour == "11:25":
-                # MTH211
-                alert("MTH211")
-                zoom_meeting("MTH211", "MTH211")
-
-            elif hour == "14:30" or hour == "14:31" or hour == "14:32" or hour == "14:33" or hour == "14:34" or hour == "14:35":
-                # BIO213
-                alert("BIO213")
-                zoom_meeting("BIO213", "BIO213")
-
-            else:
-                print("NO class right now!")
-                sleep(60)
-
-
-        # friday schedule
-        elif day == "Friday":
-            if hour == "09:00" or hour == "09:01" or hour == "09:02" or hour == "09:03" or hour == "09:04" or hour == "09:05":
-                # BIO213
-                alert("BIO213")
-                zoom_meeting("BIO213", "BIO213")
-
-            elif hour == "11:20" or hour == "11:21" or hour == "11:22" or hour == "11:23" or hour == "11:24" or hour == "11:25":
-                # BIO211
-                alert("BIO211")
-                zoom_meeting("BIO211", "BIO211")
-
-            elif hour == "14:30" or hour == "14:31" or hour == "14:32" or hour == "14:33" or hour == "14:34" or hour == "14:35":
-                # MTH211
-                alert("MTH211")
-                zoom_meeting("MTH211", "MTH211")
-
-            else:
-                print("NO class right now!")
-                sleep(60)
-
-
-        else:
-            print("Holiday! Enjoy.")
-            quit()
+        join_class(day)
+        sleep(30)
