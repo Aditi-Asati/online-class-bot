@@ -1,5 +1,5 @@
 # online-class-bot
-Tired of manually joining online classes? The **online-class-bot** is on rescue!!
+Tired of manually joining online classes? The **online-class-bot** comes on rescue!!
 
 This **online-class-bot** is a bot written in python which is able to join online classes through zoom and google meet.
 
