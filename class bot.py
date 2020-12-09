@@ -3,7 +3,7 @@ from win10toast import ToastNotifier
 from datetime import datetime
 from time import sleep
 from os import startfile, getlogin
-import pandas
+import pandas as pd
 
 def zoom_meeting(meeting_id:str, password:str):
     """Joins zoom meeting with provided meeting_id and password."""
@@ -35,11 +35,11 @@ def alert(lecture:str):
     toaster = ToastNotifier()
     toaster.show_toast("Class Notification", f"{lecture} class right now. Joining the meeting...")
 
-def join_class(day:str):
+def join_class():
     """
     Checks if there is any class on a particular date by extracting data from timetable.xlsx.
     """
-    timetable = pandas.read_excel(r"C:\Users\Lenovo\Documents\MS Office\Excel files\timetable.xlsx", sheet_name=day)
+    timetable = pd.read_excel(r"C:\Users\Lenovo\Documents\MS Office\Excel files\timetable.xlsx", sheet_name=datetime.now().strftime("%A"))
     current_time = datetime.now().strftime("%H:%M")
     current_hour = int(datetime.now().strftime("%H"))
     current_minute = int(datetime.now().strftime("%M"))
@@ -70,9 +70,6 @@ def join_class(day:str):
         print(f"No class right now at {current_time}.")
 
 if __name__ == "__main__":
-
     while 1:
-        day = datetime.now().strftime("%A")
-
-        join_class(day)
+        join_class()
         sleep(30)
